@@ -1,19 +1,19 @@
-from core.pswdGen import passwordGen
+import sqlite3 as sq
 
 
+con = sq.connect("test.dbs")
 
-if "__main__"==__name__:
-    pwd = passwordGen(True,True,True)
-    id = pwd.generateID()
-    print(id)
-    print("-----------------------")
-    paswd = pwd.generate()
-    print(paswd)
-    print("-----------------------")
-    enc = pwd.encrypt(paswd)
-    print(enc)
-    print("-----------------------")
-    dec = pwd.decrypt(enc)
-    print(dec)
-    print("-----------------------")
+mycursor = con.cursor()
 
+#mycursor.execute(""" create table pass (id integer primary key autoincrement, name text)""")
+
+
+mycursor.execute("""insert into pass(name) values('aymen')""")
+mycursor.execute("""insert into pass(name) values('mohamed')""")
+mycursor.execute("""insert into pass(name) values('bilel')""")
+
+mycursor.execute("""select * from pass""")
+res = mycursor.fetchall()
+for r in res:
+    print(r)
+con.close()
